@@ -93,7 +93,7 @@ class Board():
 
   def _remove_string(self, string):
     for point in string.stones:
-      for neighbor in point.neighbors:
+      for neighbor in point.neighbors():
         neighbor_string = self._grid.get(neighbor)
         if neighbor_string is None:
           continue
