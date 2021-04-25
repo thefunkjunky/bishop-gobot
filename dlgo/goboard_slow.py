@@ -26,7 +26,7 @@ class Move():
 class GoString():
   def __init__(self, color, stones, liberties):
     self.color = color
-    self.stones = stones
+    self.stones = set(stones)
     self.liberties = set(liberties)
 
   def remove_liberty(self, point):
@@ -61,7 +61,7 @@ class Board():
     self.num_cols = num_cols
     self._grid = {}
 
-  def place_stones(self, player, point):
+  def place_stone(self, player, point):
     assert self.is_on_grid(point)
     assert self._grid.get(point) is None
     adjacent_same_color = []
@@ -160,7 +160,7 @@ class GameState():
     if not move.is_play:
       return False
     next_board = copy.deepcopy(self.board)
-    next_board.place_stone(player. move.point)
+    next_board.place_stone(player, move.point)
     new_string = next_board.get_go_string(move.point)
     return new_string.num_liberties == 0
 
